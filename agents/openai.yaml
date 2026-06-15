@@ -1,0 +1,4 @@
+interface:
+  display_name: "新建需求单"
+  short_description: "优化需求内容并创建银豹旧版需求单，自动填默认字段并直接提交。"
+  default_prompt: "帮我新建旧版需求单：标题：... 描述：...（优化内容后自动提交）"
