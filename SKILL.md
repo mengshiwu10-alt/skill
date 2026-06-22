@@ -10,6 +10,7 @@ Use Browser to create and submit a demand ticket in the old Pospal demand form. 
 ## Defaults
 
 - URL: `https://ticket.pospal.cn/pdstatic/#/add?categoryUid=1716868798932543356`
+- Title prefix: automatically prepend `【新版】店铺_` to the user's title unless it already starts with that prefix or the user explicitly provides a full title.
 - Latest publish date: current date + 30 days, formatted `YYYY-MM-DD`
 - Decision reason: `行业需要`
 - Source: `产品规划`
@@ -26,6 +27,12 @@ Use Browser to create and submit a demand ticket in the old Pospal demand form. 
 
 User-provided values override these defaults.
 
+## Title Handling
+
+- Treat the user's `标题` as the actual content by default and fill `需求标题` as `【新版】店铺_` + the user's title.
+- Do not duplicate the prefix if the user title already starts with `【新版】店铺_`.
+- If the user explicitly says the provided title is a full title, asks to keep the original title, or provides a different prefix, use the title as provided.
+
 ## Content Optimization
 
 - Before filling `描述`, polish the user's provided content by default.
@@ -39,7 +46,7 @@ User-provided values override these defaults.
 1. Open the URL with Browser.
 2. If the page requires login, ask the user to log in manually, then wait for them to say they are logged in.
 3. Fill required content:
-   - `需求标题`: use the user's title.
+   - `需求标题`: apply the default title prefix rule, then fill the final title.
    - `描述`: use the optimized description by default; preserve line breaks and numbered items.
    - `最晚发布时间`: default to current date + 30 days unless the user provides a date.
    - `决策原因`: select the provided value, otherwise `行业需要`.
