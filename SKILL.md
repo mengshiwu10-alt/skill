@@ -17,6 +17,8 @@ Use Browser to create and submit a demand ticket in the old Pospal demand form. 
 - Development group: `我的店铺`
 - Handlers: `陈文彬`, `吴梦诗`
 - Development hours: `1`
+- Feishu sync URL: `https://lcnkm4pzdioe.feishu.cn/wiki/MiGjwEmOYiFQgxkXgBdc2JkTnig?table=tblJAnS25GFQ8fyW&view=vewljDKyRk`
+- Feishu creator: `吴梦诗`
 - Content optimization: optimize the user's demand description before filling it unless the user explicitly asks to keep the original text.
 - Submit behavior: submit automatically after filling required fields; do not ask for a second confirmation unless required information is missing or the user asks to review first.
 - Review: keep default `否`
@@ -65,7 +67,23 @@ User-provided values override these defaults.
    - 依赖关系备注
 6. If all required fields are available, click `提交需求` automatically without asking for confirmation.
 7. If required information is missing, ambiguous, or a page validation error appears, stop and ask the user for the missing value or correction.
-8. After success, report the demand number, title, optimized description, status, development group, development hours, handlers, and latest publish date.
+8. After success, report the demand number, title, optimized description, status, development group, development hours, handlers, latest publish date, and demand detail link.
+9. Ask the user whether to sync the created demand to the Feishu table unless the user already explicitly requested Feishu sync in the same message.
+10. If the user confirms Feishu sync, add one record to the configured Feishu table using only these fields:
+   - `需求`: `[需求编号] 需求标题`, for example `[XQ260624022] 【新版】店铺_采购退货和出库时，选择代理商支持搜索`
+   - `创建人`: `吴梦诗` unless the user overrides it
+   - `需求链接`: the submitted demand detail URL
+
+## Feishu Sync
+
+- Only sync after a demand has been successfully created and a demand detail URL is available.
+- Default behavior: ask `是否同步到飞书表格？` and wait for the user's confirmation before writing to Feishu.
+- If the user says `新建并同步飞书`, `创建后同步飞书`, or otherwise explicitly requests sync up front, sync after creation without asking again.
+- Open the configured Feishu sync URL with Browser and use the current visible table view.
+- Add a new record in the Feishu table; do not edit or delete existing records.
+- Fill only `需求`, `创建人`, and `需求链接`. Leave all other fields unchanged/blank/default.
+- If Feishu requires login or permission, ask the user to log in or request access, then continue after they confirm.
+- If the table UI changes or the target fields cannot be identified, stop and ask the user for the exact insertion location or field mapping.
 
 ## Browser Tips
 
