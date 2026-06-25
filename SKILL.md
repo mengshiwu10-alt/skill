@@ -81,6 +81,7 @@ User-provided values override these defaults.
 - If the user says `新建并同步飞书`, `创建后同步飞书`, or otherwise explicitly requests sync up front, sync after creation without asking again.
 - Open the configured Feishu sync URL with Browser and use the current visible table view.
 - Add a new record in the Feishu table; do not edit or delete existing records.
+- Insert the new record at the end of the `待开发` group, after the current last `待开发` record. Do not insert at the top of the group.
 - Fill only `需求`, `创建人`, and `需求链接`. Leave all other fields unchanged/blank/default.
 - If Feishu requires login or permission, ask the user to log in or request access, then continue after they confirm.
 - If the table UI changes or the target fields cannot be identified, stop and ask the user for the exact insertion location or field mapping.
